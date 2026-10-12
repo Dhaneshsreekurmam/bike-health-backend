@@ -1,0 +1,17 @@
+target/
+**/target/
+application.properties
+src/main/resources/application.properties
+.idea/
+.vscode/
+*.iml
+
+# Frontend files accidentally located in the backend
+
+src/main/index.css
+src/main/main.jsx
+src/main/java/com/bikehealth/frontend/
+
+# Nested Maven file; use the root pom.xml
+
+src/main/java/com/bikehealth/backend/pom.xml
