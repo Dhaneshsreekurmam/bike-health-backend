@@ -1,4 +1,3 @@
-
 package com.bikehealth.controller;
 
 import com.bikehealth.entity.Maintenance;
@@ -7,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/maintenance")
@@ -19,18 +19,18 @@ public class MaintenanceController {
     }
 
     @PostMapping
-    public Maintenance addMaintenance(@RequestBody Maintenance maintenance) {
-        return maintenanceService.addMaintenance(maintenance);
+    public ResponseEntity<Maintenance> addMaintenance(@RequestBody Maintenance maintenance) {
+        return ResponseEntity.ok(maintenanceService.addMaintenance(maintenance));
     }
 
     @GetMapping
-    public List<Maintenance> getAllMaintenance() {
-        return maintenanceService.getAllMaintenance();
+    public ResponseEntity<List<Maintenance>> getAllMaintenance() {
+        return ResponseEntity.ok(maintenanceService.getAllMaintenance());
     }
 
     @GetMapping("/bike/{bikeId}")
-    public List<Maintenance> getMaintenanceByBikeId(@PathVariable Long bikeId) {
-        return maintenanceService.getMaintenanceByBikeId(bikeId);
+    public ResponseEntity<List<Maintenance>> getMaintenanceByBikeId(@PathVariable Long bikeId) {
+        return ResponseEntity.ok(maintenanceService.getMaintenanceByBikeId(bikeId));
     }
 
     @GetMapping("/{id}")
@@ -41,14 +41,15 @@ public class MaintenanceController {
     }
 
     @PutMapping("/{id}")
-    public Maintenance updateMaintenance(
+    public ResponseEntity<Maintenance> updateMaintenance(
             @PathVariable Long id,
             @RequestBody Maintenance maintenance) {
-        return maintenanceService.updateMaintenance(id, maintenance);
+        return ResponseEntity.ok(maintenanceService.updateMaintenance(id, maintenance));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMaintenance(@PathVariable Long id) {
+    public ResponseEntity<Map<String, String>> deleteMaintenance(@PathVariable Long id) {
         maintenanceService.deleteMaintenance(id);
+        return ResponseEntity.ok(Map.of("message", "Maintenance record deleted successfully"));
     }
 }
